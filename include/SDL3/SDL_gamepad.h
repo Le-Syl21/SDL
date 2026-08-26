@@ -817,6 +817,11 @@ extern SDL_DECLSPEC SDL_Gamepad * SDLCALL SDL_GetGamepadFromPlayerIndex(int play
  *   left/right rumble
  * - `SDL_PROP_GAMEPAD_CAP_TRIGGER_RUMBLE_BOOLEAN`: true if this gamepad has
  *   simple trigger rumble
+ * - `SDL_PROP_GAMEPAD_ACCEL_FULL_SCALE_FLOAT`: the acceleration, in m/s^2,
+ *   that a reading of SDL_JOYSTICK_AXIS_MAX on this gamepad's accelerometer
+ *   axes stands for; the value at one end of the range, not the span. Only
+ *   present for devices that report it. This property is available since
+ *   SDL 3.6.0.
  *
  * \param gamepad a gamepad identifier previously returned by
  *                SDL_OpenGamepad().
@@ -834,6 +839,7 @@ extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetGamepadProperties(SDL_Gamepa
 #define SDL_PROP_GAMEPAD_CAP_PLAYER_LED_BOOLEAN     SDL_PROP_JOYSTICK_CAP_PLAYER_LED_BOOLEAN
 #define SDL_PROP_GAMEPAD_CAP_RUMBLE_BOOLEAN         SDL_PROP_JOYSTICK_CAP_RUMBLE_BOOLEAN
 #define SDL_PROP_GAMEPAD_CAP_TRIGGER_RUMBLE_BOOLEAN SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN
+#define SDL_PROP_GAMEPAD_ACCEL_FULL_SCALE_FLOAT    SDL_PROP_JOYSTICK_ACCEL_FULL_SCALE_FLOAT
 
 /**
  * Get the instance ID of an opened gamepad.

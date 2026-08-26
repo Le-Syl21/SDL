@@ -41,6 +41,12 @@ static SDL_HIDAPI_DeviceDriver *SDL_HIDAPI_drivers[] = {
 #ifdef SDL_JOYSTICK_HIDAPI_GAMECUBE
     &SDL_HIDAPI_DriverGameCube,
 #endif
+#ifdef SDL_JOYSTICK_HIDAPI_PINSCAPE
+    &SDL_HIDAPI_DriverPinscape,
+#endif
+#ifdef SDL_JOYSTICK_HIDAPI_PINSCAPE_PICO
+    &SDL_HIDAPI_DriverPinscapePico,
+#endif
 #ifdef SDL_JOYSTICK_HIDAPI_LUNA
     &SDL_HIDAPI_DriverLuna,
 #endif
@@ -279,7 +285,6 @@ static SDL_GamepadType SDL_GetJoystickGameControllerProtocol(const char *name, U
             0x0e6f, // PDP
             0x0f0d, // Hori
             0x1038, // SteelSeries
-            0x10f5, // Turtle Beach
             0x11c9, // Nacon
             0x1209, // Generic
             0x12ab, // Unknown
@@ -950,7 +955,6 @@ static SDL_HIDAPI_Device *HIDAPI_AddDevice(const struct SDL_hid_device_info *inf
         }
 
         if (!device->name) {
-            SDL_SetObjectValid(device, SDL_OBJECT_TYPE_HIDAPI_JOYSTICK, false);
             SDL_free(device->manufacturer_string);
             SDL_free(device->product_string);
             SDL_free(device->serial);

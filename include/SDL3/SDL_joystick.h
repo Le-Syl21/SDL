@@ -773,6 +773,16 @@ extern SDL_DECLSPEC bool SDLCALL SDL_SendJoystickVirtualSensorData(SDL_Joystick 
  *   left/right rumble
  * - `SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN`: true if this joystick has
  *   simple trigger rumble
+ * - `SDL_PROP_JOYSTICK_ACCEL_FULL_SCALE_FLOAT`: the acceleration, in m/s^2,
+ *   that a reading of SDL_JOYSTICK_AXIS_MAX on this joystick's accelerometer
+ *   axes stands for, so that
+ *   `acceleration = axis * SDL_PROP_JOYSTICK_ACCEL_FULL_SCALE_FLOAT / SDL_JOYSTICK_AXIS_MAX`.
+ *   A device set to +/-2 g reports 19.6133, not 39.2266: this is the value at
+ *   one end of the range, not the span. Only present for devices that report
+ *   it: an accelerometer's range is usually a firmware setting rather than a
+ *   property of the chip, so it cannot be inferred from the device's identity,
+ *   and axis values are meaningless as physical quantities without it. This
+ *   property is available since SDL 3.6.0.
  *
  * \param joystick the SDL_Joystick obtained from SDL_OpenJoystick().
  * \returns a valid property ID on success or 0 on failure; call
@@ -789,6 +799,7 @@ extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetJoystickProperties(SDL_Joyst
 #define SDL_PROP_JOYSTICK_CAP_PLAYER_LED_BOOLEAN        "SDL.joystick.cap.player_led"
 #define SDL_PROP_JOYSTICK_CAP_RUMBLE_BOOLEAN            "SDL.joystick.cap.rumble"
 #define SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN    "SDL.joystick.cap.trigger_rumble"
+#define SDL_PROP_JOYSTICK_ACCEL_FULL_SCALE_FLOAT        "SDL.joystick.accel.full_scale"
 
 /**
  * Get the implementation dependent name of a joystick.
